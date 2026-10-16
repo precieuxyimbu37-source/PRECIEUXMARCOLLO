@@ -1,171 +1,422 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Retrouve tous les liens officiels de PRECIEUXMARCOLLO : YouTube, Discord et plus encore.">
   <title>PRECIEUXMARCOLLO — Liens officiels</title>
 
   <style>
+    :root {
+      --gold: #ffd700;
+      --gold-light: #fff1a6;
+      --black: #080808;
+      --panel: rgba(255, 215, 0, 0.045);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
-      color: white;
+      color: #fff;
       background:
-        radial-gradient(circle at top, #3a2b00 0%, #111 35%, #050505 75%);
-      display: flex;
-      justify-content: center;
-      padding: 45px 20px;
+        radial-gradient(ellipse at 50% 0%, #3a2b00 0%, transparent 48%),
+        radial-gradient(ellipse at 0% 100%, #211800 0%, transparent 38%),
+        var(--black);
+      overflow-x: hidden;
     }
 
-    .container {
+    #particles {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 560px;
+      min-height: 100vh;
+      margin: auto;
+      padding: 48px 22px 28px;
       text-align: center;
     }
 
+    .crown {
+      display: inline-block;
+      font-size: 28px;
+      margin-bottom: 12px;
+      animation: float 3s ease-in-out infinite;
+    }
+
     .logo {
-      width: 105px;
-      height: 105px;
-      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 24px;
       border-radius: 50%;
-      background: linear-gradient(145deg, #ffd700, #9c7400);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #090909;
-      font-size: 24px;
+      border: 2px solid var(--gold);
+      background: linear-gradient(145deg, #ffe98a, #b8860b 48%, #4c3500);
+      box-shadow: 0 0 24px #ffd70040, inset 0 0 15px #fff5b0;
+      color: #100c00;
+      font-size: 35px;
       font-weight: 900;
-      box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+      letter-spacing: -3px;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: 31px;
+      font-size: clamp(27px, 7vw, 39px);
+      line-height: 1.2;
+      letter-spacing: 1px;
+      overflow-wrap: anywhere;
+      background: linear-gradient(
+        100deg, #fff4b0, #ffd700, #c18a00, #fff0a0
+      );
+      background-size: 250% auto;
+      color: var(--gold);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShine 6s linear infinite;
+    }
+
+    .subtitle {
+      color: #c9c3ae;
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 15px 0 28px;
+    }
+
+    .separator {
+      width: 85px;
+      height: 2px;
+      margin: 0 auto 30px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .section-title {
+      color: var(--gold);
+      font-size: 12px;
       letter-spacing: 3px;
-      margin-bottom: 10px;
-    }
-
-    .gold {
-      color: #ffd700;
-    }
-
-    .description {
-      color: #bdbdbd;
-      font-size: 15px;
-      margin-bottom: 32px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
     .links {
+      display: grid;
+      gap: 14px;
+    }
+
+    .link-card {
+      position: relative;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 15px;
-    }
-
-    .link {
+      width: 100%;
+      min-height: 78px;
+      padding: 15px 18px;
       text-decoration: none;
+      text-align: left;
       color: white;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 215, 0, 0.35);
-      padding: 19px 22px;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: 700;
-      transition: 0.25s ease;
-      backdrop-filter: blur(10px);
+      background: linear-gradient(110deg, #17150f, #0b0b0b);
+      border: 1px solid #6e5714;
+      border-radius: 15px;
+      transition: transform .25s ease, border-color .25s ease,
+                  box-shadow .25s ease, background .25s ease;
+      animation: appear .7s both;
     }
 
-    .link:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(90deg, #ffd700, #b8860b);
-      color: #050505;
-      border-color: #ffd700;
-      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+    .link-card:nth-child(2) { animation-delay: .12s; }
+    .link-card:nth-child(3) { animation-delay: .24s; }
+    .link-card:nth-child(4) { animation-delay: .36s; }
+
+    .link-card:hover,
+    .link-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      background: linear-gradient(110deg, #29200a, #111);
+      box-shadow: 0 8px 28px #ffd70018;
+      outline: none;
     }
 
-    .icon {
-      margin-right: 10px;
-      font-size: 19px;
+    .link-icon {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 45px;
+      height: 45px;
+      border: 1px solid #8e701b;
+      border-radius: 12px;
+      background: #211a08;
+      color: var(--gold);
+      font-size: 23px;
+    }
+
+    .link-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-info strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .link-info small {
+      color: #aaa493;
+      font-size: 12px;
+    }
+
+    .arrow {
+      color: var(--gold);
+      font-size: 22px;
+      transition: transform .2s;
+    }
+
+    .link-card:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 28px auto 0;
+      padding: 10px 15px;
+      border: 1px solid #665216;
+      border-radius: 50px;
+      color: #ded5b7;
+      font-size: 11px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #e8c83e;
+      border-radius: 50%;
+      box-shadow: 0 0 9px #ffd700;
     }
 
     footer {
-      margin-top: 38px;
-      color: #777;
-      font-size: 12px;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid #ffffff12;
+      color: #8f8876;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    footer strong {
+      color: var(--gold);
       letter-spacing: 1px;
     }
 
-    @media (max-width: 500px) {
-      body {
-        padding-top: 30px;
-      }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
 
-      h1 {
-        font-size: 25px;
-      }
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px #ffd70030; }
+      50% { box-shadow: 0 0 36px #ffd70070; }
+    }
 
-      .link {
-        padding: 17px;
+    @keyframes goldShine {
+      0% { background-position: 100% center; }
+      100% { background-position: -150% center; }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 380px) {
+      .page { padding: 35px 15px 24px; }
+      .link-card { padding: 12px; gap: 11px; }
+      .link-info strong { font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 
 <body>
+  <canvas id="particles" aria-hidden="true"></canvas>
 
-  <main class="container">
+  <main class="page">
+    <div class="crown" aria-hidden="true">👑</div>
 
-    <div class="logo">
-      PM
-    </div>
+    <div class="logo" aria-label="Logo PM">PM</div>
 
-    <h1>PRECIEUX<span class="gold">MARCOLLO</span></h1>
+    <p class="eyebrow">Official Links</p>
+    <h1>PRECIEUXMARCOLLO</h1>
 
-    <p class="description">
-      Bienvenue sur notre espace officiel. Retrouvez tous nos liens ici.
+    <p class="subtitle">
+      Bienvenue sur mon univers.<br>
+      Retrouve ici tous mes liens officiels.
     </p>
 
-    <div class="links">
+    <div class="separator"></div>
 
-      <a class="link" href="https://www.youtube.com/@Marcollo20" target="_blank">
-        <span class="icon">▶</span>
-        YouTube — Marcollo20
+    <h2 class="section-title">✦ Mes réseaux officiels ✦</h2>
+
+    <nav class="links" aria-label="Mes liens officiels">
+
+      <a class="link-card"
+         href="https://www.youtube.com/@Marcollo20"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">▶</span>
+        <span class="link-info">
+          <strong>YouTube — Marcollo20</strong>
+          <small>Découvre mes vidéos</small>
+        </span>
+        <span class="arrow" aria-hidden="true">›</span>
       </a>
 
-      <a class="link" href="https://www.youtube.com/@RHMYTB" target="_blank">
-        <span class="icon">▶</span>
-        YouTube — RHMYTB
+      <a class="link-card"
+         href="https://www.youtube.com/@RHMYTB"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">▶</span>
+        <span class="link-info">
+          <strong>YouTube — RHMYTB</strong>
+          <small>Retrouve aussi ma chaîne</small>
+        </span>
+        <span class="arrow" aria-hidden="true">›</span>
       </a>
 
-      <a class="link" href="https://discord.gg/jP5nKJ7Rd" target="_blank">
-        <span class="icon">💬</span>
-        Discord — Communauté
+      <a class="link-card"
+         href="https://discord.gg/rGNArsBHd8"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">♧</span>
+        <span class="link-info">
+          <strong>Discord — Nouveau serveur</strong>
+          <small>Rejoins la communauté</small>
+        </span>
+        <span class="arrow" aria-hidden="true">›</span>
       </a>
 
-      <a class="link" href="https://discord.gg/WF46uAPn" target="_blank">
-        <span class="icon">💬</span>
-        Discord — Serveur
-      </a>
+    </nav>
 
+    <div class="status">
+      <span class="status-dot"></span>
+      <span>Bienvenue dans mon univers</span>
     </div>
-<a class="link" href="https://discord.gg/rGNArsBHd8" target="_blank">
-  <span class="icon">💬</span>
-  Discord — Nouveau serveur
-</a>
-    <footer>
-      © 2026 PRECIEUXMARCOLLO — Tous droits réservés
-    </footer>
 
+    <footer>
+      <strong>PRECIEUXMARCOLLO</strong>
+      <p>Merci pour ton soutien ✨</p>
+      <p>© <span id="year"></span> — Tous droits réservés</p>
+    </footer>
   </main>
 
+  <script>
+    // Année automatique
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Particules dorées animées
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    const reduceMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let particles = [];
+    let width = 0;
+    let height = 0;
+    let animationId;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = Math.min(45, Math.floor(width / 12));
+
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.8 + 0.5,
+        speed: Math.random() * 0.35 + 0.12,
+        alpha: Math.random() * 0.6 + 0.2
+      }));
+
+      if (reduceMotion) drawParticles();
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 215, 0, ${p.alpha})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#ffd700";
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        if (!reduceMotion) {
+          p.y -= p.speed;
+          if (p.y < -5) {
+            p.y = height + 5;
+            p.x = Math.random() * width;
+          }
+        }
+      }
+    }
+
+    function animate() {
+      drawParticles();
+      if (!reduceMotion) {
+        animationId = requestAnimationFrame(animate);
+      }
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    if (!reduceMotion) animate();
+  </script>
 </body>
 </html>
-  
-  
-
-
